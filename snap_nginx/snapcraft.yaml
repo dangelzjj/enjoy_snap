@@ -1,0 +1,33 @@
+name: nginx
+version: '1.17.7'
+summary: nginx server
+description: |
+    nginx is a free, open-source, high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server.
+
+grade: stable
+confinement: devmode   #strict  #classic
+
+apps:
+  nginx:
+    command: nginx
+   # plugs: [home]
+
+parts:
+  nginx:
+    source: http://nginx.org/download/nginx-1.17.7.tar.gz
+    source-type: tar
+    plugin: autotools
+    configflags: 
+        - --conf-path=/var/snap/nginx/common/conf/nginx.conf
+        - --error-log-path=/var/snap/nginx/common/logs/error.log
+        - --http-log-path=/var/snap/nginx/common/logs/access.log
+        - --pid-path=/var/snap/nginx/common/run/nginx.pid
+        - --lock-path=/var/snap/nginx/common/lock/nginx.lock
+        - --http-client-body-temp-path=/var/snap/nginx/common/lib/nginx_client_body
+        - --http-proxy-temp-path=/var/snap/nginx/common/lib/nginx_proxy
+        - --http-fastcgi-temp-path=/var/snap/nginx/common/lib/nginx_fastcgi
+        - --http-uwsgi-temp-path=/var/snap/nginx/common/lib/nginx_uwsgi
+        - --http-scgi-temp-path=/var/snap/nginx/common/lib/nginx_scgi
+        - --with-http_ssl_module
+    build-packages: [ libpcre3, libpcre3-dev, zlib1g, zlib1g-dev,  openssl, libssl-dev ]
+    stage-packages: [ libc6, libc6-dev ]

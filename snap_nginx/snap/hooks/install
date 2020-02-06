@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+cp -R $SNAP/var/snap/nginx/common/conf $SNAP_COMMON/
+cp -R $SNAP/var/snap/nginx/common/logs $SNAP_COMMON/
+cp -R $SNAP/var/snap/nginx/common/run $SNAP_COMMON/
+mkdir $SNAP_COMMON/lib
